@@ -12,7 +12,7 @@ class GestanteController extends Controller
     {
         $query = Gestante::query();
 
-        // 🔎 Buscador
+        // 🔎 Buscador general
         if ($request->filled('buscar')) {
             $query->where(function($q) use ($request) {
                 $q->where('numero_documento', 'like', '%' . $request->buscar . '%')
@@ -23,6 +23,11 @@ class GestanteController extends Controller
         // 📌 Filtro estado
         if ($request->filled('estado')) {
             $query->where('estado', $request->estado);
+        }
+
+        // 🔎 FILTRO DNI PARA EL MAPA
+        if ($request->filled('dni_mapa')) {
+            $query->where('numero_documento', $request->dni_mapa);
         }
 
         $gestantes = $query->latest()->paginate(10);
@@ -41,11 +46,11 @@ class GestanteController extends Controller
     }
 
     public function mapa()
-{
-    $gestantes = Gestante::whereNotNull('latitud')
-        ->whereNotNull('longitud')
-        ->get();
+    {
+        $gestantes = Gestante::whereNotNull('latitud')
+            ->whereNotNull('longitud')
+            ->get();
 
-    return view('admin.mapa-gestante', compact('gestantes'));
-}
+        return view('admin.mapa-gestante', compact('gestantes'));
+    }
 }

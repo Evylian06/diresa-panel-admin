@@ -443,6 +443,70 @@ html, body {
     width: 100%;
 }
 
+/* ══ MAP SEARCH DNI ═══════════════════════ */
+.map-tools{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.dni-map-search{
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.dni-map-search input{
+    height:34px;
+    border:1.5px solid var(--border);
+    border-radius:7px;
+    padding:0 10px;
+    font-size:.75rem;
+    font-family:'Plus Jakarta Sans', sans-serif;
+    width:130px;
+    background:var(--surface);
+    outline:none;
+}
+
+.dni-map-search input:focus{
+    border-color:var(--brand);
+    box-shadow:0 0 0 2px rgba(14,107,168,.12);
+}
+
+.dni-map-search button{
+    height:34px;
+    width:34px;
+    border:none;
+    border-radius:7px;
+    background:var(--brand);
+    color:white;
+    font-size:.8rem;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.dni-map-search button:hover{
+    background:var(--brand-lt);
+}
+
+.btn-clear{
+    background:#e5e7eb;
+    padding:6px 10px;
+    border-radius:6px;
+    font-size:13px;
+    text-decoration:none;
+    color:#374151;
+    display:inline-flex;
+    align-items:center;
+    height:34px;
+}
+
+.btn-clear:hover{
+    background:#d1d5db;
+}
+
 /* ══ FILTER CARD ═══════════════════════════ */
 .filter-card {
     background: var(--card);
@@ -883,17 +947,34 @@ td.date-cell {
 
     {{-- ── MAPA ─── --}}
     <div class="map-card">
-        <div class="map-card-header">
-            <div>
-                <div class="map-title">📍 Mapa de Ubicación</div>
-                <div class="map-sub">Ubicación en tiempo real de gestantes registradas</div>
-            </div>
-            <a href="{{ route('mapa.gestantes') }}" class="btn-teal">
-                Ver mapa completo
-            </a>
+    <div class="map-card-header">
+        <div>
+            <div class="map-title">📍 Mapa de Ubicación</div>
+            <div class="map-sub">Ubicación en tiempo real de gestantes registradas</div>
         </div>
-        <div id="map"></div>
+
+        <div class="map-tools">
+
+    <form method="GET" action="{{ route('admin.gestantes.index') }}" class="dni-map-search">
+        <input type="text"
+               name="dni_mapa"
+               placeholder="Buscar DNI..."
+               maxlength="8"
+               value="{{ request('dni_mapa') }}">
+        <button type="submit">🔍</button>
+    </form>
+
+    <a href="{{ route('admin.gestantes.index') }}" class="btn-clear">
+        Limpiar
+    </a>
+
+    <a href="{{ route('mapa.gestantes') }}" class="btn-teal">
+        Ver mapa completo
+    </a>
+        </div>
     </div>
+    <div id="map"></div>  <!-- ESTA LÍNEA FALTABA -->
+</div>
 
     {{-- ── SECCIÓN TABLA ─── --}}
     <div class="section-hdr">

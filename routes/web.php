@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\GestanteController;
+use App\Http\Controllers\Admin\MapaController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -46,9 +47,8 @@ Route::get('/redirect', function () {
     return redirect()->route('cliente.dashboard');
 })->middleware('auth')->name('redirect');
 
+Route::get('/mapa-gestantes', [MapaController::class, 'index'])
+    ->name('mapa.gestantes');
+
 // Carga las rutas de Breeze
 require __DIR__.'/auth.php';
-
-
-Route::get('/mapa-gestantes', [GestanteController::class, 'mapa'])
-    ->name('mapa.gestantes');
