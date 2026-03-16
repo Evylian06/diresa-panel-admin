@@ -16,7 +16,9 @@ class GestanteController extends Controller
         if ($request->filled('buscar')) {
             $query->where(function($q) use ($request) {
                 $q->where('numero_documento', 'like', '%' . $request->buscar . '%')
-                  ->orWhere('nombre', 'like', '%' . $request->buscar . '%');
+  ->orWhere('nombre', 'like', '%' . $request->buscar . '%')
+  ->orWhere('apellido_paterno', 'like', '%' . $request->buscar . '%')
+  ->orWhere('apellido_materno', 'like', '%' . $request->buscar . '%');
             });
         }
 
@@ -47,9 +49,17 @@ class GestanteController extends Controller
 
     public function mapa()
     {
-        $gestantes = Gestante::whereNotNull('latitud')
-            ->whereNotNull('longitud')
-            ->get();
+        $gestantes = Gestante::select(
+        'nombre',
+        'apellido_paterno',
+        'estado',
+        'nivel_gravedad',
+        'latitud',
+        'longitud'
+    )
+    ->whereNotNull('latitud')
+    ->whereNotNull('longitud')
+    ->get();
 
         return view('admin.mapa-gestante', compact('gestantes'));
     }

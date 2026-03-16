@@ -956,6 +956,7 @@ td.date-cell {
         <div class="map-tools">
 
     <form method="GET" action="{{ route('admin.gestantes.index') }}" class="dni-map-search">
+        <label>Buscar</label>
         <input type="text"
                name="dni_mapa"
                placeholder="Buscar DNI..."
@@ -963,6 +964,19 @@ td.date-cell {
                value="{{ request('dni_mapa') }}">
         <button type="submit">🔍</button>
     </form>
+
+
+
+    
+      <div class="filter-group">
+                <label>Estado</label>
+                <select name="estado">
+                    <option value="">Todos los estados</option>
+                    <option value="Pendiente"  {{ request('estado')=='Pendiente'  ? 'selected':'' }}>Pendiente</option>
+                    <option value="Atendida"   {{ request('estado')=='Atendida'   ? 'selected':'' }}>Atendida</option>
+                    <option value="Emergencia" {{ request('estado')=='Emergencia' ? 'selected':'' }}>Emergencia</option>
+                </select>
+            </div>
 
     <a href="{{ route('admin.gestantes.index') }}" class="btn-clear">
         Limpiar
