@@ -181,14 +181,6 @@ input, select{
         </div>
     @endif
 
-    <!-- Cerrar sesión -->
-    <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <button type="submit" class="btn btn-crear" style="background:#444; margin-bottom:15px;">
-            🔒 Cerrar Sesión
-        </button>
-    </form>
-
     <!-- Formulario principal -->
  
     <form method="POST" action="{{ route('paciente.guardar') }}">

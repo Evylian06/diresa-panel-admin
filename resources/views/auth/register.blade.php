@@ -37,7 +37,7 @@
 
                 <div>
                     <label class="block font-semibold mb-2">Nombre completo</label>
-                    <input type="text" name="name" required
+                    <input type="text" name="nombre" required
                         class="w-full py-3 px-4 rounded-xl border-gray-300 focus:border-pink-400 focus:ring-pink-400 shadow-sm">
                 </div>
 <div>
@@ -46,7 +46,7 @@ Usuario (DNI o Carnet de Extranjería)
 </label>
 
 <input type="text"
-name="email"
+name="dni"
 maxlength="10"
 inputmode="numeric"
 pattern="[0-9]{1,10}"

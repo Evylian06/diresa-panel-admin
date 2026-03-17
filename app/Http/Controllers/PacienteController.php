@@ -10,12 +10,12 @@ class PacienteController extends Controller
 {
  public function guardar(Request $request)
 {
-    $paciente = Paciente::where('user_id', Auth::id())->first();
+    $paciente = Paciente::where('Id_paciente', Auth::id())->first();
 
     if(!$paciente){
 
         Paciente::create([
-            'user_id' => Auth::id(),
+            'Id_paciente' => Auth::id(),
             'nombre' => $request->nombre,
             'apellido_paterno' => $request->apellido_paterno,
             'apellido_materno' => $request->apellido_materno,

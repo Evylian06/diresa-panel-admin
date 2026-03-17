@@ -139,7 +139,7 @@ $indicador = $indicador ?? 'normal';
 </p>
 @endif
 
-<a href="{{ route('cliente.dashboard') }}" class="btn-inicio">
+<a href="{{ route('cliente.cuestionario') }}" class="btn-inicio">
 VOLVER AL INICIO
 </a>
 

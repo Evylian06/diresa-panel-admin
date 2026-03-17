@@ -20,7 +20,7 @@ class AuthenticatedSessionController extends Controller
     }
 
     /**
-     * Manejar la autenticación.
+     * Manejar la autenticación usando DNI.
      */
     public function store(LoginRequest $request): RedirectResponse
     {
@@ -29,12 +29,13 @@ class AuthenticatedSessionController extends Controller
 
         $user = Auth::user();
 
-        if ($user->role === 'superAdmin') {
+        // Redirección según id_rol
+        if ($user->Id_rol === 3) {
             return redirect()->route('super.dashboard');
         }
 
-        if ($user->role === 'admin') {
-           return redirect()->route('admin.dashboard');
+        if ($user->Id_rol === 2) {
+            return redirect()->route('admin.dashboard');
         }
 
         return redirect()->route('cliente.dashboard');
@@ -50,6 +51,6 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/'); // Vuelve al home
+        return redirect('/login');
     }
 }

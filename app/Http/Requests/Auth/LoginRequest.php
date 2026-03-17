@@ -24,18 +24,21 @@ class LoginRequest extends FormRequest
         ];
     }
 
-    public function authenticate(): void
+    public function authenticate()
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('dni', 'password'), $this->boolean('remember'))) {
-            RateLimiter::hit($this->throttleKey());
-
+        // Intentar autenticar usando DNI y contraseña
+        if (! Auth::attempt(['dni' => $this->dni, 'password' => $this->password], $this->boolean('remember'))) {
             throw ValidationException::withMessages([
-                'dni' => trans('auth.failed'),
+                'dni' => 'Las credenciales no coinciden.',
             ]);
         }
 
+        // Usuario autenticado
+        Auth::user();
+
+        // Limpiar el rate limiter
         RateLimiter::clear($this->throttleKey());
     }
 
