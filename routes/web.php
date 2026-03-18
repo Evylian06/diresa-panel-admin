@@ -21,18 +21,26 @@ Route::middleware(['auth'])->group(function () {
     // ----------------- DASHBOARD PERSONAL DE SALUD -----------------
     Route::prefix('admin')->name('admin.')->group(function () {
 
-        Route::get('/dashboard', function () {
+        Route::get('/gestantes', function () {
             return redirect()->route('admin.gestantes.index');
-        })->middleware('role:2')->name('dashboard');
+        })->middleware('role:2')->name('admin.gestantes');
 
         Route::resource('gestantes', GestanteController::class)->middleware('role:2');
     });
 
     // ----------------- DASHBOARD CLIENTE / USUARIO -----------------
-    Route::get('/cliente/dashboard', function () {
-        $pacienteRegistrado = \App\Models\Paciente::where('Id_paciente', Auth::id())->exists();
-        return view('cliente.dashboard', compact('pacienteRegistrado'));
-    })->middleware('role:1')->name('cliente.dashboard');
+    Route::get('/cliente/datos', function () {
+
+    $pacienteRegistrado = \App\Models\Paciente::where('Id_paciente', Auth::id())->exists();
+
+    if($pacienteRegistrado){
+        return redirect()->route('cliente.cuestionario');
+    }
+
+    return view('cliente.datos', compact('pacienteRegistrado'));
+
+})->middleware('role:1')->name('cliente.datos');
+
 
     Route::get('/cliente/cuestionario', function () {
         return view('cliente.cuestionario');
@@ -76,9 +84,9 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/redirect', function () {
     $user = Auth::user();
 
-    if ($user->Id_rol === 3) return redirect()->route('super.dashboard'); // superadmin
-    if ($user->Id_rol === 2) return redirect()->route('admin.dashboard'); // personal de salud
-    return redirect()->route('cliente.dashboard'); // usuario común
+    if ($user->Id_rol == 3) return redirect()->route('super.dashboard'); // superadmin
+    if ($user->Id_rol == 2) return redirect()->route('admin.gestantes.index'); // personal de salud
+    return redirect()->route('cliente.datos'); // usuario común
 })->middleware('auth')->name('redirect');
 
 // ----------------- MAPA GESTANTES -----------------

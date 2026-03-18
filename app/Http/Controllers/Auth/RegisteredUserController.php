@@ -32,7 +32,7 @@ class RegisteredUserController extends Controller
       $request->validate([
     'nombre' => ['required','string','max:50'],
     'dni' => ['required','string','max:12','unique:Usuarios,dni'],
-    'password' => ['required','confirmed','min:6'],
+    'password' => ['required','confirmed','min:3'],
 ]);
 
 $user = User::create([
@@ -48,6 +48,6 @@ $user = User::create([
 Auth::login($user);
 
 // redirigir al dashboard para rellenar datos
-return redirect()->route('cliente.dashboard');
+return redirect()->route('cliente.datos');
     }
 }

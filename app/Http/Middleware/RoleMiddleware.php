@@ -18,9 +18,9 @@ class RoleMiddleware
         $user = Auth::user();
 
         // Usamos Id_rol tal como está en tu DB
-        if (!in_array($user->Id_rol, $roles)) {
-            abort(403, 'No tienes permiso para acceder.');
-        }
+       if (!in_array($user->Id_rol, $roles)) {
+    abort(403, 'No tienes permiso para acceder.');
+}
 
         return $next($request);
     }

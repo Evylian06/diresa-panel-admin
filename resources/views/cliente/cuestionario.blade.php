@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>Cuestionario</title>
-<link rel="icon" type="image/png" href="{{ asset('images/dire.jpeg') }}">
+<link rel="icon" type="image/png" href="{{ asset('images/icono.png') }}">
 
 <style>
 

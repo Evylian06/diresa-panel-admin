@@ -30,15 +30,15 @@ class AuthenticatedSessionController extends Controller
         $user = Auth::user();
 
         // Redirección según id_rol
-        if ($user->Id_rol === 3) {
+        if ($user->Id_rol == 3) {
             return redirect()->route('super.dashboard');
         }
 
-        if ($user->Id_rol === 2) {
-            return redirect()->route('admin.dashboard');
+        if ($user->Id_rol == 2) {
+            return redirect()->route('admin.gestantes.index');
         }
 
-        return redirect()->route('cliente.dashboard');
+        return redirect()->route('cliente.datos');
     }
 
     /**

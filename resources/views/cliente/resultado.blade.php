@@ -3,7 +3,7 @@
 <head>
 
 <title>Resultado</title>
-<link rel="icon" type="image/png" href="{{ asset('images/dire.jpeg') }}">
+<link rel="icon" type="image/png" href="{{ asset('images/icono.png') }}">
 
 
 
